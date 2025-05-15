@@ -1,20 +1,40 @@
 {
   "QuizModel": {
-    "id": "3",
-    "title": "Kuis Fisika 1",
-    "subtitle": "Coba ges",
-    "time": "10",
-    "questionList": {
-      "0": {
-        "question": "Apa itu gaya?",
-        "options": ["Gaya tarik", "Massa", "Kecepatan", "Waktu"],
-        "correct": "Gaya tarik"
+    "id": "1",
+    "questionList": [
+      {
+        "correct": "Gaya tarik",
+        "options": [
+          "Gaya tarik",
+          "Massa",
+          "Kecepatan",
+          "Waktu"
+        ],
+        "question": "Apa itu gaya?"
       },
-      "1": {
-        "question": "Satuan SI untuk gaya?",
-        "options": ["N", "kg", "m", "s"],
-        "correct": "N"
+      {
+        "correct": "N",
+        "options": [
+          "N",
+          "kg",
+          "m",
+          "s"
+        ],
+        "question": "Satuan SI untuk gaya?"
       }
+    ],
+    "subtitle": "Besaran",
+    "time": "10",
+    "title": "Kuis Matematika 1"
+  },
+  "users": {
+    "EXw2bLY07iPxMSL2mk3b4ylnkC32": {
+      "email": "rochman279@gmail.com",
+      "role": "Guru"
+    },
+    "VGxuJy3CUQdh2sX1iRF0ay8g6FD3": {
+      "email": "faniahjelek@gmail.com",
+      "role": "Siswa"
     }
   }
 }
