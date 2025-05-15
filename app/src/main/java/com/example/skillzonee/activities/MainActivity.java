@@ -19,21 +19,23 @@ import com.example.android_quizappwithfirebase.R;
 
 import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     // Arrays to hold subject names, CardView IDs, and image resource IDs
     private final String[] subjectNames = {
-            "Toán Học",
-            "Văn Học",
-            "Tiếng Anh",
-            "Vật Lý",
-            "Hoá Học",
-            "Sinh Học",
-            "Lịch Sử",
-            "Địa Lý",
-            "Giáo Dục Công Dân"
+            "Matematika",
+            "Bahasa Indonesia",
+            "Bahasa Inggris",
+            "Fisika",
+            "Kimia",
+            "Biologi",
+            "Sejarah",
+            "Geografi",
+            "Other WKWKWK"
     };
     private final int[] cardViewIds = {
             R.id.mathsCard,
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.drawable.image_civiceducation
     };
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadImageSlide();
         loadQuiz();
 
+        mAuth = FirebaseAuth.getInstance();
+
         // Set up the navigation drawer
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Học, Học Nữa, Học Mãi");
+        toolbar.setTitle("SkillZone");
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -118,6 +124,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Handle navigation item selections
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        int id = item.getItemId();
+
+        if (id == R.id.nav_logout) {
+            mAuth.signOut(); // Logout dari Firebase
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Hapus backstack
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return true;
     }
 }

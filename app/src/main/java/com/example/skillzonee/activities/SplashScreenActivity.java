@@ -9,6 +9,7 @@ import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android_quizappwithfirebase.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
@@ -27,9 +28,15 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Start MainActivity after the delay
-                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                // Finish SplashScreenActivity so the user can't return to it
+//                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+//                finish();
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    // Sudah login, langsung ke MainActivity
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                } else {
+                    // Belum login, arahkan ke LoginActivity
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                }
                 finish();
             }
         }, 2500); // 2500 milliseconds delay (2.5 seconds)

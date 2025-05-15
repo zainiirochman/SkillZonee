@@ -26,15 +26,15 @@ public class SubjectActivity extends AppCompatActivity {
 
     static {
         // Mapping subject names to their IDs
-        SUBJECT_IDS.put("Toán Học", 1);
-        SUBJECT_IDS.put("Văn Học", 2);
-        SUBJECT_IDS.put("Tiếng Anh", 3);
-        SUBJECT_IDS.put("Vật Lý", 4);
-        SUBJECT_IDS.put("Hoá Học", 5);
-        SUBJECT_IDS.put("Sinh Học", 6);
-        SUBJECT_IDS.put("Lịch Sử", 7);
-        SUBJECT_IDS.put("Địa Lý", 8);
-        SUBJECT_IDS.put("Giáo Dục Công Dân", 9);
+        SUBJECT_IDS.put("Matematika", 1);
+        SUBJECT_IDS.put("Bahasa Indonesia", 2);
+        SUBJECT_IDS.put("Bahasa Inggris", 3);
+        SUBJECT_IDS.put("Fisika", 4);
+        SUBJECT_IDS.put("Kimia", 5);
+        SUBJECT_IDS.put("Biologi", 6);
+        SUBJECT_IDS.put("Sejarah", 7);
+        SUBJECT_IDS.put("Geografi", 8);
+        SUBJECT_IDS.put("Other WKWKWK", 9);
     }
 
     @Override

@@ -26,3 +26,4 @@ https://github.com/user-attachments/assets/735e5f80-67ce-41a7-b0ee-2f10d789c330
 2.Set up Firebase: Configure Firebase Realtime Database by adding your Firebase project credentials.
 
 3.Run the App: Build and run the app on an Android emulator or physical device.
+# SkillZonee
