@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (role.equals("Guru")) {
                             startActivity(new Intent(LoginActivity.this, GuruActivity.class));
                         } else {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, MateriActivity.class));
                         }
                         finish();
                     }

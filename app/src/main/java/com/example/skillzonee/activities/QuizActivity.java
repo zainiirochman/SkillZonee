@@ -146,9 +146,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             ItemScoreDialogBinding dialogBinding = ItemScoreDialogBinding.inflate(getLayoutInflater());
             dialogBinding.scoreProgressIndicator.setProgress(percentage);
             dialogBinding.scoreProgressText.setText(percentage + " %");
-            dialogBinding.scoreTitle.setText("Congratulations, you have completed the quiz");
+            dialogBinding.scoreTitle.setText("Kamu telah selesai mengerjakan kuis");
             dialogBinding.scoreTitle.setTextColor(Color.RED);
-            dialogBinding.scoreSubtitle.setText(score + " out of " + totalQuestions + " correct");
+            dialogBinding.scoreSubtitle.setText(score + " jawaban benar dari " + totalQuestions + " soal");
             dialogBinding.finishBtn.setOnClickListener(v -> finish()); // Close the activity when the "Finish" button is clicked
 
             new AlertDialog.Builder(this)
@@ -163,14 +163,14 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     // This method displays a confirmation dialog when the user wants to exit the quiz
     private void showExitConfirmationDialog() {
         new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit the quiz?")
-                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                .setMessage("Apakah kamu yakin keluar dari kuis?")
+                .setPositiveButton("Keluar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finishQuiz(); // End the activity if the user chooses to exit
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("Tidak", null)
                 .show();
     }
 

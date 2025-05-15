@@ -1,5 +1,6 @@
 package com.example.skillzonee.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.skillzonee.R;
 import com.example.skillzonee.model.GuruModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.*;
@@ -15,11 +17,12 @@ public class GuruActivity extends AppCompatActivity {
 
     private EditText editTextQuizId, editTextQuizTitle, editTextQuizSubtitle, editTextQuizTime;
     private LinearLayout questionContainer;
-    private Button btnAddQuestion, btnSubmitQuiz;
+    private Button btnAddQuestion,btnAddMaterial, btnLogout, btnSubmitQuiz;
 
     private List<GuruModel.QuestionModel> questionList = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference quizRef;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class GuruActivity extends AppCompatActivity {
         // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance();
         quizRef = database.getReference("QuizModel");
+        mAuth = FirebaseAuth.getInstance();
 
         // Inisialisasi view
         editTextQuizId = findViewById(R.id.editTextQuizId);
@@ -37,9 +41,11 @@ public class GuruActivity extends AppCompatActivity {
         editTextQuizTime = findViewById(R.id.editTextQuizTime);
         questionContainer = findViewById(R.id.questionContainer);
         btnAddQuestion = findViewById(R.id.btnAddQuestion);
+        btnLogout = findViewById(R.id.btnLogout);
         btnSubmitQuiz = findViewById(R.id.btnSubmitQuiz);
 
         btnAddQuestion.setOnClickListener(v -> addQuestionView());
+        btnLogout.setOnClickListener(v -> logout());
         btnSubmitQuiz.setOnClickListener(v -> submitQuizToFirebase());
     }
 
@@ -47,6 +53,14 @@ public class GuruActivity extends AppCompatActivity {
         View questionView = getLayoutInflater().inflate(R.layout.item_question, null);
 
         questionContainer.addView(questionView);
+    }
+
+    private void logout(){
+        mAuth.signOut();
+        Intent intent = new Intent(GuruActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Hapus backstack
+        startActivity(intent);
+        finish();
     }
 
     private void submitQuizToFirebase() {
@@ -84,7 +98,7 @@ public class GuruActivity extends AppCompatActivity {
         }
 
         GuruModel quiz = new GuruModel(id, title, subtitle, time, questionList);
-        quizRef.child(id).setValue(quiz)
+        quizRef.setValue(quiz)
                 .addOnSuccessListener(aVoid -> Toast.makeText(this, "Kuis berhasil disimpan", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(this, "Gagal menyimpan kuis", Toast.LENGTH_SHORT).show());
     }

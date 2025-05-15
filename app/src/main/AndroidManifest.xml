@@ -20,6 +20,9 @@
             android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.MateriActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.GuruActivity"
             android:exported="false" />
         <activity

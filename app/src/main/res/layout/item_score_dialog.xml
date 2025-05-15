@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Congrats! You have passed"
+        tools:text="Kamu telah selesai mengerjakan kuis"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -43,13 +43,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="6 out of 10 questions are correct"
+        tools:text="6 benar dari 10 soal"
         android:gravity="center"
         android:id="@+id/score_subtitle"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finish"
+        android:text="Selesai"
         android:layout_margin="8dp"
         android:backgroundTint="@color/red"
         android:id="@+id/finish_btn"/>
