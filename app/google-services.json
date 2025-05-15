@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "971009914206",
-    "project_id": "androidquizappwithfirebase",
-    "storage_bucket": "androidquizappwithfirebase.appspot.com"
+    "project_number": "525131420432",
+    "firebase_url": "https://skillful-b431d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "skillful-b431d",
+    "storage_bucket": "skillful-b431d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:971009914206:android:e58304c3fe7fb5cf690bcf",
+        "mobilesdk_app_id": "1:525131420432:android:144bbf469ff70444a94b95",
         "android_client_info": {
           "package_name": "com.example.android_quizappwithfirebase"
         }
@@ -15,7 +16,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC9lWnS3JNeCFBEqXjj8Bq4CE4Yfd7uAFg"
+          "current_key": "AIzaSyBtkxbsalW6Puz5s24MVGBbyYtxE4nsh-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525131420432:android:335484a47862b1c3a94b95",
+        "android_client_info": {
+          "package_name": "com.example.skillzonee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtkxbsalW6Puz5s24MVGBbyYtxE4nsh-U"
         }
       ],
       "services": {

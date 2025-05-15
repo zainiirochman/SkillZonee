@@ -3,30 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="200dp"
     android:gravity="bottom"
     android:padding="16dp"
-    android:background="@drawable/image_background"
+    android:background="#A1C9B5"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/image_logo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Android Knowledge"
+        android:text="User"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textSize="10pt"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact@androidknowledge.com"
+        android:text="email user"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="6pt"
         android:layout_marginBottom="16dp"/>
 
 </LinearLayout>

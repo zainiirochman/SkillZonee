@@ -1,4 +1,4 @@
-package com.example.android_quizappwithfirebase.activities;
+package com.example.skillzonee.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.android_quizappwithfirebase.QuizListAdapter;
-import com.example.android_quizappwithfirebase.model.QuizModel;
-import com.example.android_quizappwithfirebase.R;
-import com.example.android_quizappwithfirebase.databinding.ActivitySubjectBinding;
+import com.example.skillzonee.QuizListAdapter;
+import com.example.skillzonee.model.QuizModel;
+import com.example.skillzonee.R;
+import com.example.skillzonee.databinding.ActivitySubjectBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

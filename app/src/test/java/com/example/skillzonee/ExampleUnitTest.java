@@ -1,4 +1,4 @@
-package com.example.android_quizappwithfirebase;
+package com.example.skillzonee;
 
 import org.junit.Test;
 

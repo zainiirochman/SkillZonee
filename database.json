@@ -1,0 +1,20 @@
+{
+  "QuizModel": {
+    "id": "1",
+    "title": "Kuis Fisika 1",
+    "subtitle": "Coba ges",
+    "time": "10",
+    "questionList": {
+      "0": {
+        "question": "Apa itu gaya?",
+        "options": ["Gaya tarik", "Massa", "Kecepatan", "Waktu"],
+        "correct": "Gaya tarik"
+      },
+      "1": {
+        "question": "Satuan SI untuk gaya?",
+        "options": ["N", "kg", "m", "s"],
+        "correct": "N"
+      }
+    }
+  }
+}

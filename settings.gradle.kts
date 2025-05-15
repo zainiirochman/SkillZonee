@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android_QuizAppWithFirebase"
+rootProject.name = "SkillZonee"
 include(":app")

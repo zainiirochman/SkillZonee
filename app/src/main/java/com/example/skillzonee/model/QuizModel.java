@@ -1,4 +1,4 @@
-package com.example.android_quizappwithfirebase.model;
+package com.example.skillzonee.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.android_quizappwithfirebase.activities;
+package com.example.skillzonee.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +15,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 
-import com.example.android_quizappwithfirebase.R;
+import com.example.skillzonee.R;
 
 import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;

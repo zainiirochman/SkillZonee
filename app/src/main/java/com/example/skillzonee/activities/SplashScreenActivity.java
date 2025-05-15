@@ -1,4 +1,4 @@
-package com.example.android_quizappwithfirebase.activities;
+package com.example.skillzonee.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.android_quizappwithfirebase.R;
+import com.example.skillzonee.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 @SuppressLint("CustomSplashScreen")

@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">QuizAppWithFireBase</string>
-    <string name="maths">Toán Học</string>
-    <string name="literature">Văn Học</string>
-    <string name="english">Tiếng Anh</string>
-    <string name="physics">Vật Lý   </string>
-    <string name="chemistry">Hoá Học</string>
-    <string name="biology">Sinh Học</string>
-    <string name="history">Lịch Sử</string>
-    <string name="geography">Địa Lý</string>
-    <string name="civic">  Giáo Dục\nCông Dân</string>
-    <string name="sologan">Học, Học Nữa, Học Mãi</string>
+    <string name="app_name">SkillZonee</string>
+    <string name="maths">Matematika</string>
+    <string name="literature">Bahasa Indonesia</string>
+    <string name="english">Bahasa Inggris</string>
+    <string name="physics">Fisika</string>
+    <string name="chemistry"> Kimia </string>
+    <string name="biology">Biologi</string>
+    <string name="history">Sejarah</string>
+    <string name="geography">Geografi</string>
+    <string name="civic">Other WKWKWKWK</string>
+    <string name="sologan">Mencerdaskan Anak Bangsa</string>
     <string name="todo">TODO</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
-    <string name="finish">Kết Thúc</string>
+    <string name="finish">Selesai</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

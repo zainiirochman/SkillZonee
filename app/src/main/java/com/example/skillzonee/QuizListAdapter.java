@@ -1,4 +1,4 @@
-package com.example.android_quizappwithfirebase;
+package com.example.skillzonee;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android_quizappwithfirebase.activities.QuizActivity;
-import com.example.android_quizappwithfirebase.model.QuizModel;
+import com.example.skillzonee.activities.QuizActivity;
+import com.example.skillzonee.model.QuizModel;
 
 import java.util.List;
 

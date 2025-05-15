@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.android_quizappwithfirebase"
+    namespace = "com.example.skillzonee"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.android_quizappwithfirebase"
+        applicationId = "com.example.skillzonee"
         minSdk = 25
         targetSdk = 34
         versionCode = 1
@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
