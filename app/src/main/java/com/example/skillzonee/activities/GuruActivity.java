@@ -1,140 +1,91 @@
 package com.example.skillzonee.activities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import android.view.View;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
 
 import com.example.skillzonee.R;
+import com.example.skillzonee.model.GuruModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.*;
 
-import android.view.MenuItem;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
+public class GuruActivity extends AppCompatActivity {
 
-import java.util.ArrayList;
+    private EditText editTextQuizId, editTextQuizTitle, editTextQuizSubtitle, editTextQuizTime;
+    private LinearLayout questionContainer;
+    private Button btnAddQuestion, btnSubmitQuiz;
 
-public class GuruActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    // Arrays to hold subject names, CardView IDs, and image resource IDs
-    private final String[] subjectNames = {
-            "Matematika",
-            "Bahasa Indonesia",
-            "Bahasa Inggris",
-            "Fisika",
-            "Kimia",
-            "Biologi",
-            "Sejarah",
-            "Geografi",
-            "Other WKWKWK"
-    };
-    private final int[] cardViewIds = {
-            R.id.mathsCard,
-            R.id.literatureCard,
-            R.id.englishCard,
-            R.id.physicsCard,
-            R.id.chemistryCard,
-            R.id.biologyCard,
-            R.id.historyCard,
-            R.id.geographyCard,
-            R.id.civicEducationCard
-    };
-    private final int[] imageResIds = {
-            R.drawable.image_maths,
-            R.drawable.image_literature,
-            R.drawable.image_english,
-            R.drawable.image_physics,
-            R.drawable.image_chemistry,
-            R.drawable.image_biology,
-            R.drawable.image_history,
-            R.drawable.image_geography,
-            R.drawable.image_civiceducation
-    };
-
-    private FirebaseAuth mAuth;
+    private List<GuruModel.QuestionModel> questionList = new ArrayList<>();
+    private FirebaseDatabase database;
+    private DatabaseReference quizRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_guru); // pastikan layout ini sesuai nama XML kamu
 
-        // Load the image slider and quiz cards
-        loadImageSlide();
-        loadQuiz();
+        // Inisialisasi Firebase
+        database = FirebaseDatabase.getInstance();
+        quizRef = database.getReference("QuizModel");
 
-        mAuth = FirebaseAuth.getInstance();
+        // Inisialisasi view
+        editTextQuizId = findViewById(R.id.editTextQuizId);
+        editTextQuizTitle = findViewById(R.id.editTextQuizTitle);
+        editTextQuizSubtitle = findViewById(R.id.editTextQuizSubtitle);
+        editTextQuizTime = findViewById(R.id.editTextQuizTime);
+        questionContainer = findViewById(R.id.questionContainer);
+        btnAddQuestion = findViewById(R.id.btnAddQuestion);
+        btnSubmitQuiz = findViewById(R.id.btnSubmitQuiz);
 
-        // Set up the navigation drawer
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("SkillZone");
-        setSupportActionBar(toolbar);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        btnAddQuestion.setOnClickListener(v -> addQuestionView());
+        btnSubmitQuiz.setOnClickListener(v -> submitQuizToFirebase());
     }
 
-    // Method to load the image slider with images from Firebase Storage
-    private void loadImageSlide() {
-        ImageSlider imageSlider = findViewById(R.id.ImageSlide);
-        ArrayList<SlideModel> slideModels = new ArrayList<>();
+    private void addQuestionView() {
+        View questionView = getLayoutInflater().inflate(R.layout.item_question, null);
 
-        // Add image URLs to the slide models
-        slideModels.add(new SlideModel("https://suaramuslim.net/wp-content/uploads/2019/02/Adab-guru-sebelum-mengajar-1024x614.png", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/fir-slideimagewithfirebase.appspot.com/o/banner_image%2Fbanner_image_three?alt=media&token=6fccfa77-6878-4646-8a58-a15fb029634b", ScaleTypes.FIT));
-        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/fir-slideimagewithfirebase.appspot.com/o/banner_image%2Fbanner_image_four?alt=media&token=c088bbf3-347c-46a8-8b1e-0f25094d35fa", ScaleTypes.FIT));
-
-        imageSlider.setImageList(slideModels, ScaleTypes.FIT);
-
-        // Set an item click listener to open a URL when an image is clicked
-        imageSlider.setItemClickListener(i -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sv.haui.edu.vn/register/"));
-            startActivity(intent);
-        });
+        questionContainer.addView(questionView);
     }
 
-    // Method to load the quiz cards with their respective images and names
-    private void loadQuiz() {
-        for (int i = 0; i < cardViewIds.length; i++) {
-            CardView cardView = findViewById(cardViewIds[i]);
-            final int index = i; // Save index for OnClickListener
-            cardView.setOnClickListener(v -> navigateToSubject(imageResIds[index], subjectNames[index]));
-        }
-    }
+    private void submitQuizToFirebase() {
+        String id = editTextQuizId.getText().toString().trim();
+        String title = editTextQuizTitle.getText().toString().trim();
+        String subtitle = editTextQuizSubtitle.getText().toString().trim();
+        String time = editTextQuizTime.getText().toString().trim();
 
-    // Method to navigate to the SubjectActivity with the selected subject's image and name
-    private void navigateToSubject(int imageResId, String subjectName) {
-        Intent subjectActivity = new Intent(GuruActivity.this, SubjectActivity.class);
-        subjectActivity.putExtra("image", imageResId);
-        subjectActivity.putExtra("name", subjectName);
-        startActivity(subjectActivity);
-    }
+        questionList.clear();
 
-    // Handle navigation item selections
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
+        for (int i = 0; i < questionContainer.getChildCount(); i++) {
+            View qView = questionContainer.getChildAt(i);
 
-        if (id == R.id.nav_logout) {
-            mAuth.signOut(); // Logout dari Firebase
-            Intent intent = new Intent(GuruActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Hapus backstack
-            startActivity(intent);
-            finish();
-            return true;
+            EditText etQuestion = qView.findViewById(R.id.editTextQuestion);
+            EditText etOption1 = qView.findViewById(R.id.editTextOption1);
+            EditText etOption2 = qView.findViewById(R.id.editTextOption2);
+            EditText etOption3 = qView.findViewById(R.id.editTextOption3);
+            EditText etOption4 = qView.findViewById(R.id.editTextOption4);
+            EditText etCorrect = qView.findViewById(R.id.editTextCorrect);
+
+            List<String> options = Arrays.asList(
+                    etOption1.getText().toString().trim(),
+                    etOption2.getText().toString().trim(),
+                    etOption3.getText().toString().trim(),
+                    etOption4.getText().toString().trim()
+            );
+
+            GuruModel.QuestionModel question = new GuruModel.QuestionModel(
+                    etQuestion.getText().toString().trim(),
+                    etCorrect.getText().toString().trim(),
+                    options
+            );
+
+            questionList.add(question);
         }
 
-        return true;
+        GuruModel quiz = new GuruModel(id, title, subtitle, time, questionList);
+        quizRef.child(id).setValue(quiz)
+                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Kuis berhasil disimpan", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(this, "Gagal menyimpan kuis", Toast.LENGTH_SHORT).show());
     }
 }

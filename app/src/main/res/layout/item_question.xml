@@ -35,7 +35,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/editTextCorrectAnswer"
+        android:id="@+id/editTextCorrect"
         android:hint="Jawaban Benar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
