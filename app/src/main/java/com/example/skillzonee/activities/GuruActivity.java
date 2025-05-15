@@ -31,7 +31,7 @@ public class GuruActivity extends AppCompatActivity {
 
         // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance();
-        quizRef = database.getReference("QuizModel");
+        quizRef = database.getReference();
         mAuth = FirebaseAuth.getInstance();
 
         // Inisialisasi view
@@ -98,7 +98,7 @@ public class GuruActivity extends AppCompatActivity {
         }
 
         GuruModel quiz = new GuruModel(id, title, subtitle, time, questionList);
-        quizRef.setValue(quiz)
+        quizRef.push().setValue(quiz)
                 .addOnSuccessListener(aVoid -> Toast.makeText(this, "Kuis berhasil disimpan", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(this, "Gagal menyimpan kuis", Toast.LENGTH_SHORT).show());
     }
