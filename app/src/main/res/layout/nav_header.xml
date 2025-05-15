@@ -15,19 +15,21 @@
         android:src="@drawable/image_logo"/>
 
     <TextView
+        android:id="@+id/textViewRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="10pt"/>
+        android:textSize="10pt"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="email user"
         android:textColor="@color/white"
-        android:textSize="6pt"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="6pt" />
 
 </LinearLayout>
