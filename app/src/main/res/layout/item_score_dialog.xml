@@ -15,7 +15,16 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:id="@+id/score_title"/>
+
+    <TextView
+        android:id="@+id/textEmailScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="email user"
+        android:textSize="6pt" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -25,6 +34,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/score_progress_indicator"
             android:layout_centerVertical="true"
+            app:indicatorColor="#A1C9B5"
             app:trackColor="@color/gray"
             tools:progress="60"
             app:trackCornerRadius="20dp"
@@ -51,7 +61,7 @@
         android:layout_height="wrap_content"
         android:text="Selesai"
         android:layout_margin="8dp"
-        android:backgroundTint="@color/red"
+        android:backgroundTint="#A1C9B5"
         android:id="@+id/finish_btn"/>
 
 </LinearLayout>

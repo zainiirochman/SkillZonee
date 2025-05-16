@@ -20,12 +20,18 @@ import com.example.skillzonee.model.QuestionModel;
 import com.example.skillzonee.R;
 import com.example.skillzonee.databinding.ActivityQuizBinding;
 import com.example.skillzonee.databinding.ItemScoreDialogBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
 
-    // List of questions and the quiz time
     private static List<QuestionModel> questionModelList;
     private static String time;
     private ActivityQuizBinding binding;
@@ -33,12 +39,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private String selectedAnswer = "";
     private int score = 0;
 
-    // This method is called from outside to set the list of questions
     public static void setQuestionModelList(List<QuestionModel> questionList) {
         questionModelList = questionList;
     }
 
-    // This method is called from outside to set the quiz time
     public static void setTime(String time) {
         QuizActivity.time = time;
     }
@@ -49,7 +53,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         binding = ActivityQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Set click listeners for buttons and start the quiz
         binding.btn0.setOnClickListener(this);
         binding.btn1.setOnClickListener(this);
         binding.btn2.setOnClickListener(this);
@@ -57,11 +60,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         binding.nextBtn.setOnClickListener(this);
         binding.endBtn.setOnClickListener(this);
 
-        loadQuestions(); // Load questions
-        startTimer(); // Start the timer
+        loadQuestions();
+        startTimer();
     }
 
-    // This method starts the countdown timer
     private void startTimer() {
         long totalTimeInMillis = Integer.parseInt(time) * 60 * 1000L;
         new CountDownTimer(totalTimeInMillis, 1000L) {
@@ -76,20 +78,18 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-                finishQuiz(); // End the quiz when the time is up
+                finishQuiz();
             }
         }.start();
     }
 
-    // This method loads the next question
     @SuppressLint("SetTextI18n")
     private void loadQuestions() {
-        selectedAnswer = ""; // Reset the selected answer
+        selectedAnswer = "";
         if (currentQuestionIndex == questionModelList.size()) {
-            finishQuiz(); // End the quiz if all questions are answered
+            finishQuiz();
             return;
         }
-        // Display the question and options
         binding.questionIndicatorTextview.setText("Question " + (currentQuestionIndex + 1) + "/ " + questionModelList.size());
         binding.questionProgressIndicator.setProgress((int) ((currentQuestionIndex / (float) questionModelList.size()) * 100));
         binding.questionTextview.setText(questionModelList.get(currentQuestionIndex).getQuestion());
@@ -102,7 +102,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        // Set the background color of all buttons to gray
         binding.btn0.setBackgroundColor(getColor(R.color.gray));
         binding.btn1.setBackgroundColor(getColor(R.color.gray));
         binding.btn2.setBackgroundColor(getColor(R.color.gray));
@@ -110,46 +109,49 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             if (view.getId() == R.id.next_btn) {
-                // If the "Next" button is clicked
                 if (selectedAnswer.isEmpty()) {
-                    // Check if the user has selected an answer
-                    Toast.makeText(getApplicationContext(), "Please select an answer to continue", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Pilih jawaban sebelum melanjutkan", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (selectedAnswer.equals(questionModelList.get(currentQuestionIndex).getCorrect())) {
-                    // If the answer is correct, increase the score
                     score++;
-                    Log.i("Quiz Score", valueOf(score));
+                    Log.i("Nilai", valueOf(score));
                 }
-                currentQuestionIndex++; // Move to the next question
-                loadQuestions(); // Load the next question
+                currentQuestionIndex++;
+                loadQuestions();
             } else if (view.getId() == R.id.end_btn) {
-                onExitButtonClick(); // Call the method when the "End" button is clicked
+                onExitButtonClick();
             } else {
-                // If another option is selected
                 selectedAnswer = ((Button) view).getText().toString();
-                view.setBackgroundColor(getColor(R.color.orange)); // Set the background color of the selected button
+                view.setBackgroundColor(getColor(R.color.orange));
             }
         } catch (Exception e) {
             Toast.makeText(this, "Application error", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // This method displays the results after completing the quiz
     @SuppressLint("SetTextI18n")
     private void finishQuiz() {
         try {
             int totalQuestions = questionModelList.size();
             int percentage = (int) (((float) score / totalQuestions) * 100);
 
-            // Create a dialog to display the results
             ItemScoreDialogBinding dialogBinding = ItemScoreDialogBinding.inflate(getLayoutInflater());
             dialogBinding.scoreProgressIndicator.setProgress(percentage);
             dialogBinding.scoreProgressText.setText(percentage + " %");
             dialogBinding.scoreTitle.setText("Kamu telah selesai mengerjakan kuis");
-            dialogBinding.scoreTitle.setTextColor(Color.RED);
+            dialogBinding.scoreTitle.setTextColor(Color.BLACK);
             dialogBinding.scoreSubtitle.setText(score + " jawaban benar dari " + totalQuestions + " soal");
-            dialogBinding.finishBtn.setOnClickListener(v -> finish()); // Close the activity when the "Finish" button is clicked
+
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                String email = currentUser.getEmail();
+                dialogBinding.textEmailScore.setText(email);
+            } else {
+                dialogBinding.textEmailScore.setText("Email tidak tersedia");
+            }
+
+            dialogBinding.finishBtn.setOnClickListener(v -> finish());
 
             new AlertDialog.Builder(this)
                     .setView(dialogBinding.getRoot())
@@ -160,22 +162,20 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // This method displays a confirmation dialog when the user wants to exit the quiz
     private void showExitConfirmationDialog() {
         new AlertDialog.Builder(this)
                 .setMessage("Apakah kamu yakin keluar dari kuis?")
                 .setPositiveButton("Keluar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finishQuiz(); // End the activity if the user chooses to exit
+                        finishQuiz();
                     }
                 })
                 .setNegativeButton("Tidak", null)
                 .show();
     }
 
-    // This method is called when the user clicks the "Exit" button on the interface
     public void onExitButtonClick() {
-        showExitConfirmationDialog(); // Show the confirmation dialog when the user clicks the "Exit" button on the interface
+        showExitConfirmationDialog();
     }
 }

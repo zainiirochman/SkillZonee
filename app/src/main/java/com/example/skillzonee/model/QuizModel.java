@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizModel {
-    private String id; // Quiz ID
-    private String title; // Quiz title
-    private String subtitle; // Quiz subtitle
-    private String time; // Quiz duration as a string
-    private List<QuestionModel> questionList; // List of questions in the quiz
+    private String id;
+    private String title;
+    private String subtitle;
+    private String time;
+    private List<QuestionModel> questionList;
 
-    // Constructor to create a new QuizModel object
     public QuizModel(String id, String title, String subtitle, String time, List<QuestionModel> questionList) {
         this.id = id;
         this.title = title;
@@ -19,12 +18,10 @@ public class QuizModel {
         this.questionList = questionList;
     }
 
-    // Default constructor
     public QuizModel() {
         this("", "", "", "", new ArrayList<>());
     }
 
-    // Getter and setter for id
     public String getId() {
         return id;
     }
@@ -33,7 +30,6 @@ public class QuizModel {
         this.id = id;
     }
 
-    // Getter and setter for title
     public String getTitle() {
         return title;
     }
@@ -42,7 +38,6 @@ public class QuizModel {
         this.title = title;
     }
 
-    // Getter and setter for subtitle
     public String getSubtitle() {
         return subtitle;
     }
@@ -51,7 +46,6 @@ public class QuizModel {
         this.subtitle = subtitle;
     }
 
-    // Getter and setter for time
     public String getTime() {
         return time;
     }
@@ -60,7 +54,6 @@ public class QuizModel {
         this.time = time;
     }
 
-    // Getter and setter for questionList
     public List<QuestionModel> getQuestionList() {
         return questionList;
     }

@@ -4,9 +4,7 @@ public class LoginModel {
     private String email;
     private String password;
 
-    public LoginModel() {
-        // Default constructor
-    }
+    public LoginModel() {}
 
     public LoginModel(String email, String password) {
         this.email = email;

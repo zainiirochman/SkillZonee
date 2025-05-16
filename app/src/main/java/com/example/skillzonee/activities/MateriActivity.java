@@ -125,9 +125,9 @@ public class MateriActivity extends AppCompatActivity implements NavigationView.
         }
 
         if (id == R.id.nav_logout) {
-            mAuth.signOut(); // Logout dari Firebase
+            mAuth.signOut();
             Intent intent = new Intent(MateriActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Hapus backstack
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
             return true;

@@ -5,9 +5,7 @@ public class MateriModel {
     private String description;
     private String youtubeLink;
 
-    public MateriModel() {
-        // Diperlukan oleh Firebase
-    }
+    public MateriModel() {}
 
     public MateriModel(String title, String description, String youtubeLink) {
         this.title = title;

@@ -19,26 +19,20 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        // Hide the action bar if it exists
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        // Create a new Handler to delay the transition to the MainActivity
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-//                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-//                finish();
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    // Sudah login, langsung ke MainActivity
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 } else {
-                    // Belum login, arahkan ke LoginActivity
                     startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                 }
                 finish();
             }
-        }, 2500); // 2500 milliseconds delay (2.5 seconds)
+        }, 2500);
     }
 }

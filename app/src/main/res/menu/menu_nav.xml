@@ -9,12 +9,12 @@
 
         <item
             android:id="@+id/nav_material"
-            android:icon="@drawable/icon_home_24px"
+            android:icon="@android:drawable/ic_menu_slideshow"
             android:title="Materi"/>
 
         <item
             android:id="@+id/nav_quiz"
-            android:icon="@drawable/icon_home_24px"
+            android:icon="@android:drawable/ic_menu_help"
             android:title="Quiz"/>
 
         <item

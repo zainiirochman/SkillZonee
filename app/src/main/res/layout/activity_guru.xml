@@ -35,12 +35,14 @@
         <Button
             android:id="@+id/btnAddQuestion"
             android:text="Tambah Soal"
+            android:backgroundTint="#A1C9B5"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btnAddMaterial"
+            android:backgroundTint="#A1C9B5"
             android:text="Upload Materi"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
@@ -48,6 +50,7 @@
 
         <Button
             android:id="@+id/btnLogout"
+            android:backgroundTint="#8F8F8F"
             android:text="Logout"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
@@ -61,6 +64,7 @@
 
         <Button
             android:id="@+id/btnSubmitQuiz"
+            android:backgroundTint="#A1C9B5"
             android:text="Simpan Kuis"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"

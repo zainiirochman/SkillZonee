@@ -34,22 +34,19 @@ public class SubjectActivity extends AppCompatActivity {
         SUBJECT_IDS.put("Biologi", 6);
         SUBJECT_IDS.put("Sejarah", 7);
         SUBJECT_IDS.put("Geografi", 8);
-        SUBJECT_IDS.put("Other WKWKWK", 9);
+        SUBJECT_IDS.put("PPKN", 9);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Initialize and set the layout for the binding variable
         binding = ActivitySubjectBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Hide the action bar if it exists
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        // Get intent data
         Intent intent = this.getIntent();
         if (intent != null) {
             String name = intent.getStringExtra("name");
@@ -58,57 +55,42 @@ public class SubjectActivity extends AppCompatActivity {
             binding.subjectName.setText(name);
         }
 
-        // Initialize quizModelList
         quizModelList = new ArrayList<>();
 
-        // Fetch data from Firebase
         getDataFromFirebase();
         onResume();
     }
 
-    // Set up the RecyclerView
     private void setupRecyclerView() {
-        // Hide ProgressBar once data is fetched
         binding.progressBar.setVisibility(View.GONE);
 
-        // Initialize and set the adapter for RecyclerView
         QuizListAdapter adapter = new QuizListAdapter(quizModelList);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
     }
 
-    // Method to fetch data from Firebase
     private void getDataFromFirebase() {
-        // Show ProgressBar while data is being fetched
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        // Reference the root node of the Firebase Database
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        // Listen for data retrieval success
         databaseReference.get().addOnSuccessListener(dataSnapshot -> {
             if (dataSnapshot.exists()) {
-                // Iterate through each child node in dataSnapshot
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Parse dataSnapshot into QuizModel object
                     String subjectName = binding.subjectName.getText().toString();
                     int subjectId = getSubjectId(subjectName);
                     String strSubjectId = String.valueOf(subjectId);
                     QuizModel quizModel = snapshot.getValue(QuizModel.class);
                     if (quizModel != null && quizModel.getId().equals(strSubjectId)) {
-                        // Add quizModel to the list
                         quizModelList.add(quizModel);
                     }
                 }
             }
-            // Set up RecyclerView after data is fetched
             setupRecyclerView();
         }).addOnFailureListener(e -> {
-            // Handle any errors during data retrieval
         });
     }
 
-    // Method to get the subject ID from the subject name
     public static int getSubjectId(String subjectName) {
         return SUBJECT_IDS.getOrDefault(subjectName, 0);
     }

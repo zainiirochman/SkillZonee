@@ -2,7 +2,6 @@ package com.example.skillzonee.activities;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,8 +46,8 @@ public class UploadMateriActivity extends AppCompatActivity {
         }
 
         materiRef.get().addOnSuccessListener(snapshot -> {
-            long count = snapshot.getChildrenCount(); // jumlah node yang sudah ada
-            String newKey = String.valueOf(count + 1); // buat key baru: "1", "2", dst
+            long count = snapshot.getChildrenCount();
+            String newKey = String.valueOf(count + 1);
 
             HashMap<String, Object> materiData = new HashMap<>();
             materiData.put("title", title);

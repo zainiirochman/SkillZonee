@@ -35,7 +35,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    // Arrays to hold subject names, CardView IDs, and image resource IDs
     private final String[] subjectNames = {
             "Matematika",
             "Bahasa Indonesia",
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             "Biologi",
             "Sejarah",
             "Geografi",
-            "Other WKWKWK"
+            "PPKN"
     };
     private final int[] cardViewIds = {
             R.id.mathsCard,
@@ -122,35 +121,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // Method to load the image slider with images from Firebase Storage
     private void loadImageSlide() {
         ImageSlider imageSlider = findViewById(R.id.ImageSlide);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
-        // Add image URLs to the slide models
         slideModels.add(new SlideModel("https://img.harianjogja.com/posts/2025/04/24/1211397/siswa-sekolah-ppdb.jpg", ScaleTypes.FIT));
         slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/fir-slideimagewithfirebase.appspot.com/o/banner_image%2Fbanner_image_three?alt=media&token=6fccfa77-6878-4646-8a58-a15fb029634b", ScaleTypes.FIT));
         slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/fir-slideimagewithfirebase.appspot.com/o/banner_image%2Fbanner_image_four?alt=media&token=c088bbf3-347c-46a8-8b1e-0f25094d35fa", ScaleTypes.FIT));
 
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
-        // Set an item click listener to open a URL when an image is clicked
         imageSlider.setItemClickListener(i -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sv.haui.edu.vn/register/"));
             startActivity(intent);
         });
     }
 
-    // Method to load the quiz cards with their respective images and names
     private void loadQuiz() {
         for (int i = 0; i < cardViewIds.length; i++) {
             CardView cardView = findViewById(cardViewIds[i]);
-            final int index = i; // Save index for OnClickListener
+            final int index = i;
             cardView.setOnClickListener(v -> navigateToSubject(imageResIds[index], subjectNames[index]));
         }
     }
 
-    // Method to navigate to the SubjectActivity with the selected subject's image and name
     private void navigateToSubject(int imageResId, String subjectName) {
         Intent subjectActivity = new Intent(MainActivity.this, SubjectActivity.class);
         subjectActivity.putExtra("image", imageResId);
@@ -158,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(subjectActivity);
     }
 
-    // Handle navigation item selections
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -179,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_logout) {
             mAuth.signOut(); // Logout dari Firebase
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Hapus backstack
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
             return true;

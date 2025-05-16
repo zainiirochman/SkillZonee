@@ -9,9 +9,7 @@ public class GuruModel {
     private String time;
     private List<QuestionModel> questionList;
 
-    public GuruModel() {
-        // Diperlukan untuk Firebase
-    }
+    public GuruModel() {}
 
     public GuruModel(String id, String title, String subtitle, String time, List<QuestionModel> questionList) {
         this.id = id;
@@ -21,7 +19,6 @@ public class GuruModel {
         this.questionList = questionList;
     }
 
-    // Getter dan Setter
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -42,9 +39,7 @@ public class GuruModel {
         private String correct;
         private List<String> options;
 
-        public QuestionModel() {
-            // Diperlukan untuk Firebase
-        }
+        public QuestionModel() {}
 
         public QuestionModel(String question, String correct, List<String> options) {
             this.question = question;
