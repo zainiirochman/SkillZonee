@@ -27,14 +27,12 @@ public class GuruActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guru); // pastikan layout ini sesuai nama XML kamu
+        setContentView(R.layout.activity_guru);
 
-        // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance();
         quizRef = database.getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        // Inisialisasi view
         editTextQuizId = findViewById(R.id.editTextQuizId);
         editTextQuizTitle = findViewById(R.id.editTextQuizTitle);
         editTextQuizSubtitle = findViewById(R.id.editTextQuizSubtitle);
@@ -43,9 +41,11 @@ public class GuruActivity extends AppCompatActivity {
         btnAddQuestion = findViewById(R.id.btnAddQuestion);
         btnLogout = findViewById(R.id.btnLogout);
         btnSubmitQuiz = findViewById(R.id.btnSubmitQuiz);
+        btnAddMaterial = findViewById(R.id.btnAddMaterial);
 
         btnAddQuestion.setOnClickListener(v -> addQuestionView());
         btnLogout.setOnClickListener(v -> logout());
+        btnAddMaterial.setOnClickListener(v -> uploadMateriPage());
         btnSubmitQuiz.setOnClickListener(v -> submitQuizToFirebase());
     }
 
@@ -61,6 +61,12 @@ public class GuruActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Hapus backstack
         startActivity(intent);
         finish();
+    }
+
+    private void uploadMateriPage(){
+        Intent intent = new Intent(GuruActivity.this, UploadMateriActivity.class);
+        startActivity(intent);
+
     }
 
     private void submitQuizToFirebase() {

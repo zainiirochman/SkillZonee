@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Judul Materi"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deskripsi Materi"
+        android:inputType="textMultiLine"
+        android:minLines="3"/>
+
+    <EditText
+        android:id="@+id/editTextYoutubeUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Link YouTube"
+        android:inputType="textUri"/>
+
+    <Button
+        android:id="@+id/buttonUploadMateri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Materi"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
