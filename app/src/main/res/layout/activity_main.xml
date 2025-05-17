@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
-    android:background="#FFFFFF"
+    android:background="@color/backgroundColor"
     tools:openDrawer="start"
     tools:context=".activities.MainActivity">
 
@@ -138,6 +138,7 @@
                                         android:layout_marginTop="10dp"
                                         android:layout_marginBottom="10dp"
                                         android:layout_weight="1"
+                                        android:background="@color/backgroundColor"
                                         app:cardElevation="20dp"
                                         app:cardCornerRadius="20dp">
 
